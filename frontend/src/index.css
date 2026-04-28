@@ -1,0 +1,32 @@
+/* Tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Reset */
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background-color: #0b1220;
+  color: white;
+}
+
+/* Smooth rendering */
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar (optional but clean) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 10px;
+}
+
+/* Remove default textarea styling conflicts */
+textarea {
+  outline: none;
+}
