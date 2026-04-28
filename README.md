@@ -43,6 +43,7 @@ Detected Keywords
 Attack Type
 Reasoning
 
+
 2.Voice Intelligence Layer
 
 Uses Librosa for signal processing
@@ -63,6 +64,7 @@ Output:
 Voice Risk Score
 Audio Feature Analysis
 
+
 3.Fusion Engine
 
 Combines text and voice scores using weighted multi-modal fusion
@@ -80,6 +82,7 @@ Final Threat Score
 Threat Level (SAFE / WARNING / CRITICAL)
 Confidence Score
 
+
 4.Correlation Engine
 
 Analyzes relationships between multiple inputs
@@ -95,6 +98,7 @@ Flags coordinated attack
 Output:
 
 Correlation Status (True / False)
+
 
 5.Explainability & Timeline Layer
 
