@@ -3,14 +3,14 @@
 FusionShield AI is a multi-layer AI-powered cybersecurity system designed to detect coordinated scam attacks across text (email, SMS, chat) and voice channels. It combines NLP, voice intelligence, and a fusion engine to identify cross-channel threats with explainable outputs.
 
 # Key Features
-Multi-channel detection (text and voice)
-Cross-channel correlation detection
-Weighted fusion risk scoring
-Confidence scoring system
-Explainable AI outputs
-Attack timeline visualization
-Risk gauge and fusion graphs
-Works with single or multiple inputs
+1.Multi-channel detection (text and voice)
+2.Cross-channel correlation detection
+3.Weighted fusion risk scoring
+4.Confidence scoring system
+5.Explainable AI outputs
+6.Attack timeline visualization
+7.Risk gauge and fusion graphs
+8.Works with single or multiple inputs
 
 # System Architecture
 1. Text Intelligence Layer
@@ -34,64 +34,72 @@ Detects coordinated multi-channel attacks
 
 # Tech Stack
 ## Frontend
-React
-Tailwind CSS
-Recharts
+1.React
+2.Tailwind CSS
+3.Recharts
 
 ## Backend
-FastAPI
-Uvicorn
+1.FastAPI
+2.Uvicorn
 
 ## AI Components
-DistilBERT for text analysis
-Resemblyzer for voice analysis
-Keyword and intent detection
-Signal feature extraction
+1.DistilBERT for text analysis
+2.Resemblyzer for voice analysis
+3.Keyword and intent detection
+4.Signal feature extraction
 
 # Workflow
-User provides text and/or audio input
-Text and voice are analyzed independently
-Fusion engine combines risk scores
-Correlation engine detects cross-channel patterns
-System outputs:
+1.User provides text and/or audio input
+2.Text and voice are analyzed independently
+3.Fusion engine combines risk scores
+4.Correlation engine detects cross-channel patterns
+5.System outputs:
 Threat level (SAFE / WARNING / CRITICAL)
 Confidence score
 Explanation and visual insights
 
 # Use Cases
-Fraud detection in banking and fintech
-Scam detection for individuals
-Enterprise communication security
+1.Fraud detection in banking and fintech
+2.Scam detection for individuals
+3.Enterprise communication security
 
 # Installation
-Clone the repository
+### Clone the repository
 git clone https://github.com/your-username/fusionshield-ai.git
 
-Navigate to project folder
+### Navigate to project folder
 cd fusionshield-ai
 
-Backend Setup
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
+### Backend Setup
+1.cd backend
+2.pip install -r requirements.txt
+3.uvicorn main:app --reload
 
-Frontend Setup
-cd frontend
-npm install
-npm start
+### Frontend Setup
+1.cd frontend
+
+2.npm install
+
+3.npm start
 
 # Output Example
 Threat Level: CRITICAL
+
 Confidence: 92%
+
 Reason: OTP request, urgency signals, suspicious voice pattern
+
 Visualization: Risk gauge and fusion graph
 
 # Impact
 FusionShield AI improves cybersecurity by detecting coordinated multi-platform scams, reducing fraud risks, and introducing cross-channel threat intelligence.
 
 # Future Enhancements
-Real-time call monitoring
-Deepfake voice detection
-Integration with messaging platforms
-Continuous learning models
+1.Real-time call monitoring
+
+2.Deepfake voice detection
+
+3.Integration with messaging platforms
+
+4.Continuous learning models
 
