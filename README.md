@@ -4,12 +4,19 @@ FusionShield AI is a multi-layer AI-powered cybersecurity system designed to det
 
 # Key Features
 1.Multi-channel detection (text and voice)
+
 2.Cross-channel correlation detection
+
 3.Weighted fusion risk scoring
+
 4.Confidence scoring system
+
 5.Explainable AI outputs
+
 6.Attack timeline visualization
+
 7.Risk gauge and fusion graphs
+
 8.Works with single or multiple inputs
 
 # System Architecture
@@ -35,32 +42,46 @@ Detects coordinated multi-channel attacks
 # Tech Stack
 ## Frontend
 1.React
+
 2.Tailwind CSS
+
 3.Recharts
 
 ## Backend
 1.FastAPI
+
 2.Uvicorn
 
 ## AI Components
 1.DistilBERT for text analysis
+
 2.Resemblyzer for voice analysis
+
 3.Keyword and intent detection
+
 4.Signal feature extraction
 
 # Workflow
 1.User provides text and/or audio input
+
 2.Text and voice are analyzed independently
+
 3.Fusion engine combines risk scores
+
 4.Correlation engine detects cross-channel patterns
+
 5.System outputs:
 Threat level (SAFE / WARNING / CRITICAL)
+
 Confidence score
+
 Explanation and visual insights
 
 # Use Cases
 1.Fraud detection in banking and fintech
+
 2.Scam detection for individuals
+
 3.Enterprise communication security
 
 # Installation
@@ -72,7 +93,9 @@ cd fusionshield-ai
 
 ### Backend Setup
 1.cd backend
+
 2.pip install -r requirements.txt
+
 3.uvicorn main:app --reload
 
 ### Frontend Setup
