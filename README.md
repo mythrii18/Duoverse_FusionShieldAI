@@ -17,29 +17,32 @@ Works with single or multiple inputs
 Uses DistilBERT for NLP analysis
 Detects phishing patterns, urgency, and financial intent
 Output: Text Risk Score
+
 2. Voice Intelligence Layer
 Uses Resemblyzer for voice analysis
 Extracts embeddings and signal features
 Detects anomalies and suspicious speech patterns
 Output: Voice Risk Score
+
 3. Fusion Engine
 Combines text and voice scores
 Increases risk when both signals are suspicious
+
 4. Correlation Engine
 Identifies relationships across channels
 Detects coordinated multi-channel attacks
 
 # Tech Stack
-Frontend
+## Frontend
 React
 Tailwind CSS
 Recharts
 
-Backend
+## Backend
 FastAPI
 Uvicorn
 
-AI Components
+## AI Components
 DistilBERT for text analysis
 Resemblyzer for voice analysis
 Keyword and intent detection
