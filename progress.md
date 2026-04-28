@@ -1,5 +1,3 @@
-# Progress Log
-
 ## Checkpoint 1 (3 PM)
 
 ### Tasks Completed:
