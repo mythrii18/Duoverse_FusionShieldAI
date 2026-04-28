@@ -1,33 +1,20 @@
 import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
-import Logs from "./pages/Logs";
+import Reports from "./pages/Reports";
+import History from "./pages/History";
 
 export default function App() {
   const [page, setPage] = useState("dashboard");
   const [logs, setLogs] = useState([]);
 
   return (
-    <div className="flex h-screen bg-[#0b1220] text-white overflow-hidden">
-      
-      {/* Sidebar */}
-      <div className="w-64 shrink-0 border-r border-gray-800 bg-[#0f172a]">
-        <Sidebar setPage={setPage} />
-      </div>
+    <div className="flex">
+      <Sidebar setPage={setPage} />
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        
-        {/* Page Content */}
-        <main className="flex-1 overflow-y-auto p-6">
-          {page === "dashboard" ? (
-            <Dashboard logs={logs} setLogs={setLogs} />
-          ) : (
-            <Logs logs={logs} />
-          )}
-        </main>
-
-      </div>
+      {page === "dashboard" && <Dashboard logs={logs} setLogs={setLogs} />}
+      {page === "reports" && <Reports logs={logs} />}
+      {page === "history" && <History logs={logs} />}
     </div>
   );
 }

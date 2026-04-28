@@ -1,203 +1,112 @@
-import React, { useState } from "react";
-import RiskChart from "../components/charts/RiskChart";
-import BarChartBox from "../components/charts/BarChartBox";
-import PieChartBox from "../components/charts/PieChartBox";
-import GaugeChart from "../components/charts/GaugeChart";
+import { useState } from "react";
+import GaugeChart from "../components/GaugeChart";
+import Bar from "../components/Bar";
 
 export default function Dashboard({ logs, setLogs }) {
+
   const [text, setText] = useState("");
-  const [audioFile, setAudioFile] = useState(null);
-  const [risk, setRisk] = useState(0);
-  const [lastScan, setLastScan] = useState("--");
-  const [result, setResult] = useState(null);
+  const [file, setFile] = useState(null);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const runAnalysis = async () => {
+    setLoading(true);
+
+    const formData = new FormData();
+    if (text) formData.append("text", text);
+    if (file) formData.append("file", file);
+
     try {
-      const formData = new FormData();
-
-      if (text) formData.append("text", text);
-      if (audioFile) formData.append("file", audioFile);
-
       const res = await fetch("http://127.0.0.1:8000/analyze", {
         method: "POST",
         body: formData,
       });
 
-      const data = await res.json();
+      if (!res.ok) throw new Error();
 
-      setResult(data);
+      const result = await res.json();
+      setData(result);
 
-      const score = Math.floor(data.fusion_result.final_score * 100);
-      setRisk(score);
+      setLogs([...logs, result]);
 
-      setLastScan(new Date().toLocaleTimeString());
-
-      setLogs(prev => [
-        ...prev,
-        {
-          time: new Date().toLocaleTimeString(),
-          message: `Threat detected: ${data.fusion_result.level}`
-        }
-      ]);
-
-    } catch (error) {
-      console.error(error);
-      alert("Backend connection failed");
+    } catch {
+      alert("Backend not connected");
     }
+
+    setLoading(false);
   };
 
-  const lineData = [
-    { name: "Text", score: result?.text_analysis?.score * 100 || 0 },
-    { name: "Voice", score: result?.voice_analysis?.score * 100 || 0 },
-    { name: "Fusion", score: risk }
-  ];
-
-  const barData = [
-    { name: "Text", value: result?.text_analysis?.score * 100 || 0 },
-    { name: "Voice", value: result?.voice_analysis?.score * 100 || 0 },
-    { name: "Fusion", value: risk }
-  ];
-
-  const pieData = [
-    { name: "Safe", value: risk < 40 ? 1 : 0 },
-    { name: "Medium", value: risk >= 40 && risk < 70 ? 1 : 0 },
-    { name: "High", value: risk >= 70 ? 1 : 0 }
-  ];
+  const risk = data?.fusion_result?.score || 0;
+  const textScore = data?.text_analysis?.score || 0;
+  const voiceScore = data?.voice_analysis?.score || 0;
 
   return (
-    <div className="space-y-6">
+    <div className="flex-1 p-8 space-y-6">
 
-      {/* HEADER */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold">⚡ FusionShield</h1>
-          <p className="text-gray-400 text-sm">
-            Multi-channel AI threat detection
-          </p>
-        </div>
+      {/* INPUT */}
+      <div className="bg-[#111827] p-6 rounded-2xl">
+        <textarea
+          placeholder="Paste suspicious message..."
+          className="w-full p-3 bg-black rounded"
+          onChange={(e) => setText(e.target.value)}
+        />
 
-        <div className="text-green-400 text-sm">
-          ● Live | {lastScan}
+        <div className="flex mt-3 gap-3">
+          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+
+          <button
+            onClick={runAnalysis}
+            className="ml-auto bg-purple-600 px-4 py-2 rounded"
+          >
+            {loading ? "Analyzing..." : "Run Analysis"}
+          </button>
         </div>
       </div>
 
-      {/* MAIN GRID */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* HERO */}
+      <div className="grid grid-cols-2 gap-6">
 
-        {/* INPUT */}
-        <div className="bg-[#111827] p-5 rounded-2xl shadow-lg flex flex-col">
-          <h3 className="text-lg font-semibold mb-3">Input</h3>
-
-          <textarea
-            className="bg-[#020617] border border-gray-700 rounded-lg p-3 text-sm mb-4 h-32 resize-none"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Paste suspicious message..."
-          />
-
-          <div className="flex justify-between items-center">
-            <label className="bg-gray-700 px-3 py-2 rounded-lg cursor-pointer text-sm">
-              🎤 Audio
-              <input
-                type="file"
-                accept=".wav"
-                hidden
-                onChange={(e) => setAudioFile(e.target.files[0])}
-              />
-            </label>
-
-            <button
-              onClick={runAnalysis}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-lg text-sm"
-            >
-              Analyze
-            </button>
-          </div>
-
-          {audioFile && (
-            <p className="text-xs mt-2 text-gray-400">
-              🎧 {audioFile.name}
-            </p>
-          )}
-        </div>
-
-        {/* PIPELINE */}
-        <div className="bg-[#111827] p-5 rounded-2xl shadow-lg">
-          <h3 className="text-lg font-semibold mb-4">AI Pipeline</h3>
-
-          <div className="space-y-3 text-sm">
-            <div className="bg-[#1f2937] p-3 rounded-lg">🔍 Text Intelligence</div>
-            <div className="bg-[#1f2937] p-3 rounded-lg">🎤 Voice Intelligence</div>
-            <div className="bg-[#1f2937] p-3 rounded-lg">🧠 Fusion Engine</div>
-            <div className="bg-[#1f2937] p-3 rounded-lg">🔗 Correlation Engine</div>
-          </div>
-        </div>
-
-        {/* RISK + CHARTS */}
-        <div className="bg-[#111827] p-5 rounded-2xl shadow-lg space-y-4">
-
-          <div className="text-center">
-            <h1
-              className={`text-4xl font-bold ${
-                risk < 40
-                  ? "text-green-400"
-                  : risk < 70
-                  ? "text-yellow-400"
-                  : "text-red-500"
-              }`}
-            >
-              {risk}
-            </h1>
-            <p className="text-gray-400 text-sm">Risk Score</p>
-          </div>
-
+        <div className="bg-[#111827] p-6 rounded-2xl text-center">
+          <h1 className="text-5xl">{risk}</h1>
+          <p>{data?.fusion_result?.level || "-"}</p>
           <GaugeChart value={risk} />
-          <RiskChart data={lineData} />
-          <BarChartBox data={barData} />
-          <PieChartBox data={pieData} />
+        </div>
+
+        <div className="bg-[#111827] p-6 rounded-2xl space-y-4">
+          <Bar label="Text" value={textScore} color="bg-blue-500"/>
+          <Bar label="Voice" value={voiceScore} color="bg-purple-500"/>
+          <Bar label="Fusion" value={risk} color="bg-pink-500"/>
         </div>
 
       </div>
 
-      {/* RESULT */}
-      {result && (
-        <div className="bg-[#111827] p-5 rounded-2xl shadow-lg">
-          <h3 className="text-lg font-semibold mb-3">Analysis Result</h3>
+      {/* CORRELATION */}
+      {data && (
+        <div className="p-4 rounded bg-green-800 text-center">
+          {data.fusion_result.correlation_detected
+            ? "🚨 Correlation detected"
+            : "✅ No correlation"}
+        </div>
+      )}
 
-          <p>
-            <b>Threat Level:</b>{" "}
-            <span className="text-blue-400">
-              {result.fusion_result.level}
-            </span>
-          </p>
-
-          <p><b>Confidence:</b> {result.fusion_result.confidence}</p>
-          <p><b>Attack Type:</b> {result.text_analysis?.attack_type}</p>
-
-          <ul className="list-disc pl-5 mt-2 text-sm text-gray-300">
-            {result.text_analysis?.reason
-              ?.split(";")
-              .map((r, i) => <li key={i}>{r}</li>)}
-          </ul>
+      {/* EXPLAIN */}
+      {data?.text_analysis && (
+        <div className="bg-[#111827] p-6 rounded-2xl">
+          <h3>Why flagged?</h3>
+          {data.text_analysis.reasons.map((r, i) => (
+            <p key={i}>✔ {r}</p>
+          ))}
         </div>
       )}
 
       {/* TIMELINE */}
-      <div className="bg-[#111827] p-5 rounded-2xl shadow-lg">
-        <h3 className="text-lg font-semibold mb-3">Attack Timeline</h3>
-
-        {result ? (
-          <ul className="list-disc pl-5 text-sm text-gray-300">
-            {result.timeline.map((t, i) => (
-              <li key={i}>{t}</li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-400 text-sm">
-            Email → Voice → Fusion → Correlation → Alert
-          </p>
-        )}
-      </div>
+      {data && (
+        <div className="bg-[#111827] p-6 rounded-2xl">
+          {data.timeline.map((t, i) => (
+            <p key={i}>• {t}</p>
+          ))}
+        </div>
+      )}
 
     </div>
   );

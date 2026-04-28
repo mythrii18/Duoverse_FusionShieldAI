@@ -8,7 +8,6 @@ from fusion import fuse
 
 app = FastAPI()
 
-# Enable CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -24,25 +23,36 @@ def home():
 @app.post("/analyze")
 async def analyze(text: str = Form(None), file: UploadFile = File(None)):
 
-    text_result = analyze_text(text) if text else None
+    text_result = None
     voice_result = None
 
+    if text:
+        text_result = analyze_text(text)
+
     if file:
-        with open("temp.wav", "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-        voice_result = analyze_voice("temp.wav")
+        try:
+            file_path = "temp.wav"
+            with open(file_path, "wb") as buffer:
+                shutil.copyfileobj(file.file, buffer)
+
+            voice_result = analyze_voice(file_path)
+
+        except Exception as e:
+            return {"error": str(e)}
 
     fusion_result = fuse(text_result, voice_result)
 
-    # Timeline simulation
     timeline = []
     if text:
-        timeline.append("Text input analyzed")
+        timeline.append("Text analyzed")
     if file:
-        timeline.append("Voice input analyzed")
+        timeline.append("Voice analyzed")
+    timeline.append("Fusion applied")
+
     if fusion_result["correlation_detected"]:
         timeline.append("Cross-channel correlation detected")
-    timeline.append("Threat level computed")
+
+    timeline.append("Final decision computed")
 
     return {
         "text_analysis": text_result,

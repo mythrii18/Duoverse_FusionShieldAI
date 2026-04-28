@@ -1,53 +1,52 @@
-from transformers import pipeline
-
-classifier = pipeline("text-classification")
-
-KEYWORDS = ["bank", "otp", "verify", "urgent", "account", "password", "login", "transaction"]
-
 def analyze_text(text):
-    text_lower = text.lower()
+    if not text:
+        return None
 
-    result = classifier(text)[0]
-    model_score = result['score']
+    text = text.lower()
 
-    found_keywords = [word for word in KEYWORDS if word in text_lower]
-    keyword_score = len(found_keywords) / len(KEYWORDS)
+    score = 0
+    reasons = []
 
-    urgency_flag = 1 if "urgent" in text_lower else 0
-    link_flag = 1 if "http" in text_lower else 0
-    otp_flag = 1 if "otp" in text_lower else 0
+    # 🚨 HIGH RISK KEYWORDS
+    high_risk = ["otp", "password", "bank", "account blocked", "verify", "urgent"]
 
-    final_score = (
-        model_score * 0.5 +
-        keyword_score * 0.2 +
-        urgency_flag * 0.1 +
-        link_flag * 0.1 +
-        otp_flag * 0.1
-    )
+    # ⚠️ MEDIUM RISK
+    medium_risk = ["click", "link", "update", "login", "confirm"]
 
-    # Attack type detection
-    if otp_flag:
-        attack_type = "OTP Scam"
-    elif "bank" in text_lower:
-        attack_type = "Bank Fraud"
-    elif link_flag:
-        attack_type = "Phishing Link"
+    # HIGH RISK DETECTION
+    for word in high_risk:
+        if word in text:
+            score += 0.3
+            reasons.append(f"High-risk keyword: {word}")
+
+    # MEDIUM RISK DETECTION
+    for word in medium_risk:
+        if word in text:
+            score += 0.15
+            reasons.append(f"Suspicious keyword: {word}")
+
+    # URGENCY DETECTION
+    if "immediately" in text or "urgent" in text:
+        score += 0.2
+        reasons.append("Urgency detected")
+
+    # LIMIT SCORE
+    score = min(score, 1.0)
+
+    # CLASSIFICATION
+    if score > 0.7:
+        level = "HIGH"
+        attack = "Phishing / Scam"
+    elif score > 0.4:
+        level = "WARNING"
+        attack = "Suspicious"
     else:
-        attack_type = "General Suspicious"
-
-    reason = []
-    if found_keywords:
-        reason.append(f"Keywords detected: {', '.join(found_keywords)}")
-    if urgency_flag:
-        reason.append("Urgency language detected")
-    if link_flag:
-        reason.append("Suspicious link detected")
-    if otp_flag:
-        reason.append("OTP request detected")
+        level = "SAFE"
+        attack = "Normal"
 
     return {
-        "score": round(final_score, 2),
-        "keywords": found_keywords,
-        "attack_type": attack_type,
-        "reason": "; ".join(reason) if reason else "No strong indicators"
+        "score": score,
+        "level": level,
+        "attack_type": attack,
+        "reasons": reasons
     }

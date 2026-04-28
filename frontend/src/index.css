@@ -3,30 +3,201 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global Reset */
+/* ---------------- GLOBAL ---------------- */
+
 body {
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #0b1220;
   color: white;
 }
 
-/* Smooth rendering */
 * {
   box-sizing: border-box;
 }
 
-/* Scrollbar (optional but clean) */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #1f2937;
   border-radius: 10px;
 }
 
-/* Remove default textarea styling conflicts */
+/* ---------------- LAYOUT ---------------- */
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* ---------------- SIDEBAR ---------------- */
+
+.sidebar {
+  width: 240px;
+  background: #0f172a;
+  padding: 20px;
+  border-right: 1px solid #1f2937;
+}
+
+.sidebar-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sidebar-section {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 20px;
+}
+
+.sidebar-link {
+  display: block;
+  margin: 10px 0;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.sidebar-link:hover {
+  color: white;
+}
+
+/* ---------------- TOPBAR ---------------- */
+
+.topbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #1f2937;
+}
+
+.system-status {
+  color: #22c55e;
+  font-size: 14px;
+}
+
+/* ---------------- DASHBOARD ---------------- */
+
+.page-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: #9ca3af;
+  margin-bottom: 20px;
+}
+
+/* GRID SYSTEM */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* ---------------- CARDS ---------------- */
+
+.card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.card.small {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.card-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+/* ---------------- INPUT BOX ---------------- */
+
 textarea {
-  outline: none;
+  width: 100%;
+  height: 120px;
+  background: #020617;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  resize: none;
+}
+
+/* ---------------- BUTTONS ---------------- */
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-upload {
+  background: #1f2937;
+  color: white;
+}
+
+.btn-run {
+  background: linear-gradient(to right, #3b82f6, #9333ea);
+  color: white;
+}
+
+/* ---------------- LOGS ---------------- */
+
+.log-card {
+  background: #111827;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+/* ---------------- PIPELINE ---------------- */
+
+.pipeline-bar {
+  height: 8px;
+  background: #1f2937;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.pipeline-fill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 10px;
 }
