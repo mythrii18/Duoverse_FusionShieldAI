@@ -29,15 +29,14 @@ FusionShield AI is a multi-layer AI-powered cybersecurity system designed to det
 #### 1.Text Intelligence Layer
 
 Uses DistilBERT for NLP analysis
-Detects:
 
+Detects:
 phishing patterns
 urgency language
 financial intent (OTP, bank, login)
 suspicious links
 
 Output:
-
 Text Risk Score
 Detected Keywords
 Attack Type
@@ -49,18 +48,15 @@ Reasoning
 Uses Librosa for signal processing
 
 Extracts:
-
 energy (loudness patterns)
 zero-crossing rate (speech variation)
 signal variability
 
 Detects:
-
 abnormal speech patterns
 suspicious audio behavior
 
 Output:
-
 Voice Risk Score
 Audio Feature Analysis
 
@@ -73,11 +69,9 @@ Text given higher importance
 Voice contributes additional signal
 
 Enhances detection when:
-
 both channels show suspicious activity
 
 Output:
-
 Final Threat Score
 Threat Level (SAFE / WARNING / CRITICAL)
 Confidence Score
@@ -91,12 +85,10 @@ Checks shared intent (OTP, banking, urgency)
 Detects cross-channel coordination
 
 If correlation detected:
-
 Boosts threat score
 Flags coordinated attack
 
 Output:
-
 Correlation Status (True / False)
 
 
@@ -105,14 +97,12 @@ Correlation Status (True / False)
 Provides transparent and user-friendly insights
 
 Generates:
-
 reasoning (why flagged)
 attack type classification
 confidence score
 timeline of detected events
 
 Example Timeline:
-
 Text input analyzed
 Voice input analyzed
 Correlation detected
