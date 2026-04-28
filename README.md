@@ -26,7 +26,7 @@ FusionShield AI is a multi-layer AI-powered cybersecurity system designed to det
 11.Visualization support (gauge + graphs) 
 
 # System Architecture
-1.Text Intelligence Layer
+#### 1.Text Intelligence Layer
 
 Uses DistilBERT for NLP analysis
 Detects:
@@ -44,7 +44,7 @@ Attack Type
 Reasoning
 
 
-2.Voice Intelligence Layer
+#### 2.Voice Intelligence Layer
 
 Uses Librosa for signal processing
 
@@ -65,7 +65,7 @@ Voice Risk Score
 Audio Feature Analysis
 
 
-3.Fusion Engine
+#### 3.Fusion Engine
 
 Combines text and voice scores using weighted multi-modal fusion
 
@@ -83,7 +83,7 @@ Threat Level (SAFE / WARNING / CRITICAL)
 Confidence Score
 
 
-4.Correlation Engine
+#### 4.Correlation Engine
 
 Analyzes relationships between multiple inputs
 
@@ -100,7 +100,7 @@ Output:
 Correlation Status (True / False)
 
 
-5.Explainability & Timeline Layer
+#### 5.Explainability & Timeline Layer
 
 Provides transparent and user-friendly insights
 
