@@ -1,210 +1,211 @@
 # FusionShield AI — Multi-Channel Cyber Threat Detection
 
-FusionShield AI is a multi-layer AI-powered cybersecurity system designed to detect coordinated scam attacks across text (email, SMS, chat) and voice channels. It combines NLP, voice intelligence, and a fusion engine to identify cross-channel threats with explainable outputs.
+FusionShield AI is a multi-layer cybersecurity system designed to detect coordinated scam attacks across text (email, SMS, chat) and voice channels. It combines text intelligence, voice analysis, and a fusion engine to identify cross-channel threats with clear, explainable outputs.
 
-# Key Features
-1.Multi-platform text analysis (email, SMS, chat)
+---
 
-2.Voice signal analysis
+## Key Features
 
-3.Multi-layer AI pipeline
+- Multi-platform text analysis (email, SMS, chat)
+- Voice signal analysis
+- Multi-layer AI pipeline
+- Fusion engine combining text and voice signals
+- Cross-channel correlation detection
+- Threat classification (SAFE / WARNING / HIGH)
+- Confidence scoring
+- Explainable AI outputs (reasoning)
+- Attack type detection (OTP scams, phishing, etc.)
+- Timeline-based analysis
+- Visualizations (gauge, charts, pipeline)
 
-4.Fusion engine combining text + voice
+---
 
-5.Cross-channel correlation detection 
+## System Architecture
 
-6.Threat level classification (SAFE / WARNING / CRITICAL)
-
-7.Confidence scoring 
-
-8.Explainable AI (reasoning output) 
-
-9.Attack type detection (OTP scam, phishing, etc.)
-
-10.Timeline analysis 
-
-11.Visualization support (gauge + graphs) 
-
-# System Architecture
-#### 1.Text Intelligence Layer
-
-Uses DistilBERT for NLP analysis
+### 1. Text Intelligence Layer
+Analyzes text using NLP-based techniques.
 
 Detects:
-phishing patterns
-urgency language
-financial intent (OTP, bank, login)
-suspicious links
+- Phishing patterns  
+- Urgency signals  
+- Financial intent (OTP, bank, login)  
+- Suspicious keywords  
 
 Output:
-Text Risk Score
-Detected Keywords
-Attack Type
-Reasoning
+- Text risk score  
+- Detected patterns  
+- Attack type  
+- Reasoning  
 
+---
 
-
-
-#### 2.Voice Intelligence Layer
-
-Uses Librosa for signal processing
+### 2. Voice Intelligence Layer
+Uses signal processing for voice analysis.
 
 Extracts:
-energy (loudness patterns)
-zero-crossing rate (speech variation)
-signal variability
+- Energy (loudness patterns)  
+- Zero-crossing rate (speech variation)  
+- Signal variability  
 
 Detects:
-abnormal speech patterns
-suspicious audio behavior
+- Abnormal speech behavior  
+- Suspicious voice characteristics  
 
 Output:
-Voice Risk Score
-Audio Feature Analysis
+- Voice risk score  
+- Audio feature insights  
 
+---
 
+### 3. Fusion Engine
+Combines text and voice scores using weighted fusion.
 
-
-#### 3.Fusion Engine
-
-Combines text and voice scores using weighted multi-modal fusion
-
-Text given higher importance
-Voice contributes additional signal
+- Text has higher priority  
+- Voice adds supporting evidence  
 
 Enhances detection when:
-both channels show suspicious activity
+- Both channels indicate risk  
 
 Output:
-Final Threat Score
-Threat Level (SAFE / WARNING / CRITICAL)
-Confidence Score
+- Final threat score  
+- Threat level (SAFE / WARNING / HIGH)  
+- Confidence score  
 
+---
 
+### 4. Correlation Engine
+Detects relationships between multiple inputs.
 
+- Identifies shared intent (OTP, banking, urgency)  
+- Detects coordinated cross-channel attacks  
 
-#### 4.Correlation Engine
-
-Analyzes relationships between multiple inputs
-
-Checks shared intent (OTP, banking, urgency)
-Detects cross-channel coordination
-
-If correlation detected:
-Boosts threat score
-Flags coordinated attack
+If correlation is detected:
+- Threat score is boosted  
+- Attack is flagged as coordinated  
 
 Output:
-Correlation Status (True / False)
+- Correlation status (True / False)  
 
+---
 
+### 5. Explainability & Timeline Layer
+Provides clear and interpretable outputs.
 
-
-#### 5.Explainability & Timeline Layer
-
-Provides transparent and user-friendly insights
-
-Generates:
-reasoning (why flagged)
-attack type classification
-confidence score
-timeline of detected events
+Includes:
+- Reasoning (why flagged)  
+- Attack classification  
+- Confidence score  
+- Timeline of events  
 
 Example Timeline:
-Text input analyzed
-Voice input analyzed
-Correlation detected
-Threat level computed
+- Text analyzed  
+- Voice analyzed  
+- Correlation detected  
+- Final decision computed  
 
-# Tech Stack
-## Frontend
-1.React
+---
 
-2.Tailwind CSS
+## Tech Stack
 
-3.Recharts
+### Frontend
+- React  
+- Tailwind CSS  
+- Recharts  
 
-## Backend
-1.FastAPI
+### Backend
+- FastAPI  
+- Uvicorn  
 
-2.Uvicorn
+### AI Components
+- NLP-based text analysis (DistilBERT-inspired logic)  
+- Librosa for audio signal processing  
+- Keyword and pattern detection  
+- Fusion and correlation engine  
 
-## AI Components
-1.DistilBERT (NLP text analysis)
+---
 
-2.Librosa (audio signal processing)
+## Workflow
 
-3.Keyword + pattern detection
+1. User provides text and/or audio input  
+2. Text and voice are analyzed independently  
+3. Fusion engine combines the scores  
+4. Correlation engine detects cross-channel relationships  
+5. System outputs:
+   - Threat level  
+   - Confidence score  
+   - Explanation  
+   - Visual insights  
 
-4.Fusion & correlation engine
+---
 
-# Workflow
-1.User provides text and/or audio input
+## Screenshots
 
-2.Text and voice are analyzed independently
+(Add images from `/screenshots` folder here)
 
-3.Fusion engine combines risk scores
+---
 
-4.Correlation engine detects cross-channel patterns
+## Use Cases
 
-5.System outputs:
-Threat level (SAFE / WARNING / CRITICAL)
+- Fraud detection in banking and fintech  
+- Scam detection for individuals  
+- Enterprise communication security  
 
-Confidence score
+---
 
-Explanation and visual insights
+## Installation
 
-# Use Cases
-1.Fraud detection in banking and fintech
+### Clone Repository
 
-2.Scam detection for individuals
-
-3.Enterprise communication security
-
-# Installation
-### Clone the repository
 git clone https://github.com/your-username/fusionshield-ai.git
 
-### Navigate to project folder
 cd fusionshield-ai
 
+
 ### Backend Setup
-1.cd backend
 
-2.pip install -r requirements.txt
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
 
-3.uvicorn main:app --reload
 
 ### Frontend Setup
-1.cd frontend
 
-2.npm install
+cd frontend
+npm install
+npm start
 
-3.npm start
 
-# Output Example
-Threat Level: CRITICAL
+---
 
-Confidence: 92%
+## Output Example
 
-Reason: OTP request, urgency signals, suspicious voice pattern
+- Threat Level: HIGH  
+- Confidence: 90%+  
+- Reason: OTP request, urgency signals, suspicious voice pattern  
+- Visualization: Risk gauge, fusion graph, reports  
 
-Visualization: Risk gauge and fusion graph
+---
 
-# Innovation
-FusionShield AI detects coordinated cyber attacks by combining signals from multiple channels (text + voice).
+## Innovation
 
-Unlike traditional systems, it identifies relationships between inputs using a fusion and correlation engine, enabling detection of advanced multi-channel scams.
+FusionShield AI detects coordinated cyber attacks by combining signals from multiple channels (text and voice).  
 
-# Impact
-FusionShield AI improves cybersecurity by detecting coordinated multi-platform scams, reducing fraud risks, and introducing cross-channel threat intelligence.
+Unlike traditional systems that analyze inputs independently, it identifies relationships between channels using a fusion and correlation engine, enabling detection of advanced multi-channel scams.
 
-# Future Enhancements
-1.Real-time call monitoring
+---
 
-2.Deepfake voice detection
+## Impact
 
-3.Integration with messaging platforms
+- Improves detection of modern cyber scams  
+- Reduces fraud risk  
+- Introduces cross-channel threat intelligence  
+- Enhances user awareness and security  
 
-4.Continuous learning models
+---
 
+## Future Enhancements
+
+- Real-time call monitoring  
+- Deepfake voice detection  
+- Integration with messaging platforms  
+- Continuous learning models  
