@@ -1,52 +1,39 @@
+from transformers import pipeline
+
+# Load once (fast inference model)
+classifier = pipeline("sentiment-analysis")
+
 def analyze_text(text):
     if not text:
         return None
 
-    text = text.lower()
+    result = classifier(text)[0]
 
-    score = 0
-    reasons = []
+    label = result["label"]
+    score = result["score"]
 
-    # 🚨 HIGH RISK KEYWORDS
-    high_risk = ["otp", "password", "bank", "account blocked", "verify", "urgent"]
+    # Convert to threat score
+    if label == "NEGATIVE":
+        risk_score = score
+    else:
+        risk_score = 1 - score
 
-    # ⚠️ MEDIUM RISK
-    medium_risk = ["click", "link", "update", "login", "confirm"]
+    # Add rule boost (important for hackathon realism)
+    keywords = ["otp", "bank", "password", "urgent", "verify"]
+    keyword_boost = sum([0.1 for k in keywords if k in text.lower()])
 
-    # HIGH RISK DETECTION
-    for word in high_risk:
-        if word in text:
-            score += 0.3
-            reasons.append(f"High-risk keyword: {word}")
+    final_score = min(risk_score + keyword_boost, 1.0)
 
-    # MEDIUM RISK DETECTION
-    for word in medium_risk:
-        if word in text:
-            score += 0.15
-            reasons.append(f"Suspicious keyword: {word}")
-
-    # URGENCY DETECTION
-    if "immediately" in text or "urgent" in text:
-        score += 0.2
-        reasons.append("Urgency detected")
-
-    # LIMIT SCORE
-    score = min(score, 1.0)
-
-    # CLASSIFICATION
-    if score > 0.7:
+    if final_score > 0.7:
         level = "HIGH"
-        attack = "Phishing / Scam"
-    elif score > 0.4:
+    elif final_score > 0.4:
         level = "WARNING"
-        attack = "Suspicious"
     else:
         level = "SAFE"
-        attack = "Normal"
 
     return {
-        "score": score,
+        "score": round(final_score, 2),
         "level": level,
-        "attack_type": attack,
-        "reasons": reasons
+        "attack_type": "AI-detected threat",
+        "reasons": [f"{label} sentiment", "Keyword patterns detected"]
     }

@@ -1,39 +1,23 @@
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  Tooltip
-} from "recharts";
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-const CustomBarTooltip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    const val = payload[0].value;
+export default function BarChartBox({ text, voice, fusion }) {
+  const data = [
+    { name: "Text", value: text },
+    { name: "Voice", value: voice },
+    { name: "Fusion", value: fusion },
+  ];
 
-    return (
-      <div style={{
-        background: "#0f172a",
-        padding: "6px",
-        borderRadius: "8px",
-        fontSize: "12px"
-      }}>
-        <p>Activity: {val}</p>
-      </div>
-    );
-  }
-  return null;
-};
-
-export default function BarChartBox({ data }) {
   return (
-    <ResponsiveContainer width="100%" height={90}>
-      <BarChart data={data}>
-        <XAxis dataKey="name" stroke="#aaa" />
-        <YAxis hide />
-        <Tooltip content={<CustomBarTooltip />} />
-        <Bar dataKey="value" fill="#6366f1" radius={[6,6,0,0]} />
-      </BarChart>
-    </ResponsiveContainer>
+    <div className="glass p-4 rounded-xl">
+      <h3 className="mb-3 text-purple-400">Channel Analysis</h3>
+
+      <ResponsiveContainer width="100%" height={200}>
+        <BarChart data={data}>
+          <XAxis dataKey="name" stroke="#aaa" />
+          <Tooltip />
+          <Bar dataKey="value" fill="#7c3aed" radius={[6, 6, 0, 0]} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
