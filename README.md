@@ -138,12 +138,6 @@ Example Timeline:
 
 ---
 
-## Screenshots
-
-(Add images from `/screenshots` folder here)
-
----
-
 ## Use Cases
 
 - Fraud detection in banking and fintech  
@@ -156,9 +150,9 @@ Example Timeline:
 
 ### Clone Repository
 
-git clone https://github.com/your-username/fusionshield-ai.git
+git clone https://github.com/mythrii18/FusionShieldAI.git
 
-cd fusionshield-ai
+cd FusionShieldAI
 
 
 ### Backend Setup
