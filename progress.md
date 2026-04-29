@@ -70,6 +70,7 @@
 
 
 ## Checkpoint 4 (11 PM)
+
 ### Tasks Completed:
 - Successfully integrated and tested /analyze API (end-to-end working)
 - Implemented dynamic AI pipeline visualization with real-time data
@@ -95,6 +96,7 @@
 
 
 ## Checkpoint 5 (6 AM)
+
 ### Tasks Completed:
 - Implemented advanced UI enhancements including animations, glow effects, and interactive elements
 - Integrated audio waveform visualization for real-time signal feedback
@@ -142,13 +144,14 @@
 -Added explainability layer for both text and voice analysis outputs
 
 -Integrated full visualization suite:
-Risk gauge
 
-Channel comparison charts
+--Risk gauge
 
-Fusion impact graph (Before vs After)
+--Channel comparison charts
 
-Donut chart for reports
+--Fusion impact graph (Before vs After)
+
+--Donut chart for reports
 
 -Developed structured Reports page with threat statistics and activity logs
 
@@ -165,6 +168,7 @@ Donut chart for reports
 -Captured and added screenshots (Dashboard, Pipeline, Reports, History)
 
 -Created and finalized README with complete project documentation
+
 
 
 ### Current Progress:
