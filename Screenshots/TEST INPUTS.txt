@@ -1,0 +1,14 @@
+TEST INPUTS 
+
+🔴 HIGH RISK (OTP / Banking Scam)
+Your account has been blocked. Verify immediately by sharing OTP.
+Hello this is bank support, give your OTP now to avoid suspension.
+Urgent! Unauthorized transaction detected. Confirm your account details now.
+
+🟡 MEDIUM RISK
+We noticed unusual activity, please login and verify your account.
+Click here to update your bank details.
+
+🟢 SAFE INPUT
+Hi, let's meet tomorrow for lunch.
+Your Amazon order has been shipped.
